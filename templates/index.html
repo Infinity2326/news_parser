@@ -5,11 +5,12 @@
 {% endblock %}
 
 {% block body %}
-<div id = "logo">News</div>
 
-{% for i in range(15) %}
-    <div class="title" id="title-{{i}}">{{t[i]}}</div>
-    <div class="story" id="story-{{i}}">{{s[i]}}</div>
+{% for one in res %}
+    <article id="article-{{i}}">
+    <div class="title" id="title-{{one[0]}}">{{one[1]}}</div>
+    <div class="story" id="story-{{one[0]}}">{{one[2]}}</div>
+    </article>
 {% endfor %}
 
 {% endblock %}
