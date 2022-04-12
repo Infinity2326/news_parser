@@ -25,6 +25,20 @@ body{
 	font-family: "Glory", Arial, Helvetica, sans-serif;
 	padding: 12px;
 }
+.rating{
+	font-size: 25px;
+	font-family: "Glory", Arial, Helvetica, sans-serif;
+	margin-left: 10px;
+	padding-bottom: 10px;
+}
+.plus-rating, .minus-rating{
+	color: rgb(72,114,148);
+	text-align: midddle;
+	font-size: 17px;
+	font-family: "Glory", Arial, Helvetica, sans-serif;
+    padding-top: 5px;
+    background: rgb(240,240,240);
+}
 article{
 	background: rgb(255,255,255);
 	margin-left: 10%;

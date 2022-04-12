@@ -13,20 +13,17 @@ def create_posts():
         stories_list.append(story.text.replace('"', '.').replace("'", '.'))
 
     cursor.execute("SELECT * FROM posts;")
-    db = cursor.fetchall()
 
     for i in range(len(titles_list)):
-        if len(db) == 0:
-            cursor.execute("INSERT INTO posts VALUES (?, ?, ?)", (None, titles_list[i], stories_list[i]))
-        for one in db:
-            if titles_list[i] == one[1]:
-                pass
+        title = titles_list[i]
+        sql_request = f'SELECT * FROM posts WHERE title="{title}";'
+        sql_request = cursor.execute(sql_request).fetchone()
+        if not sql_request:
+            cursor.execute("INSERT INTO posts VALUES (?, ?, ?)", (None, title, stories_list[i]))
+            connection.commit()
+        else:
+            pass
 
-            else:
-                cursor.execute("INSERT INTO posts VALUES (?, ?, ?)", (None, titles_list[i], stories_list[i]))
-
-    cursor.execute("SELECT * FROM posts;")
-    connection.commit()
 
 
 url = 'https://slashdot.org/'

@@ -1,4 +1,6 @@
 import sqlite3
+# from os import remove
+# remove('posts.db')
 
 
 connection = sqlite3.connect('posts.db')

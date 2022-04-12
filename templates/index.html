@@ -8,8 +8,17 @@
 
 {% for one in res %}
     <article id="article-{{i}}">
-    <div class="title" id="title-{{one[0]}}">{{one[1]}}</div>
-    <div class="story" id="story-{{one[0]}}">{{one[2]}}</div>
+        <div class="title" id="title-{{one[0]}}">
+            {{one[1]}}
+        </div>
+        <div class="story" id="story-{{one[0]}}">
+            {{one[2]}}
+        </div>
+        <div class="rating" id="rating-{{rating}}">
+            {{rating}}
+            <button class = "plus-rating">+1</button>
+            <button class = "minus-rating">-1</button>
+        </div>
     </article>
 {% endfor %}
 

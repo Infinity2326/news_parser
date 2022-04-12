@@ -6,11 +6,11 @@ from database import cursor
 app = Flask(__name__)
 cursor.execute("SELECT * FROM posts;")
 results = cursor.fetchall()
-
+rating = 0
 
 @app.route('/')
 def index():
-    return render_template('index.html', res=results)
+    return render_template('index.html', res=results, rating=rating)
 
 
 if __name__ == "__main__":
