@@ -2,10 +2,7 @@ body{
 	background: rgb(240,240,240);
 	margin: 0;
 }
-p{
-    margin: 0;
-    paddding: 0;
-}
+
 #logo{
 	font-family: Baskerville, Palatino, sans-serif;
 	font-size: 3.1em;

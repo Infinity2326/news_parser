@@ -11,3 +11,4 @@ function minusRating()
     rating = rating - 1
     document.getElementById('rating_score').innerHTML=rating;
 }
+//
