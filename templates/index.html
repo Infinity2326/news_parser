@@ -7,17 +7,17 @@
 {% block body %}
 
 {% for one in res %}
-    <article id="article-{{i}}">
+    <article id="article-{{one[0]}}">
         <div class="title" id="title-{{one[0]}}">
             {{one[1]}}
         </div>
         <div class="story" id="story-{{one[0]}}">
             {{one[2]}}
         </div>
-        <div class="rating" id="rating-{{rating}}">
-            {{rating}}
-            <button class = "plus-rating">+1</button>
-            <button class = "minus-rating">-1</button>
+        <div class="rating" id="rating-{{one[0]}}">
+            <div id="rating_score">{{rating}}</div>
+            <button class = "plus-rating" onclick="plusRating({{rating}})">+1</button>
+            <button class = "minus-rating" onclick="minusRating({{rating}})">-1</button>
         </div>
     </article>
 {% endfor %}
