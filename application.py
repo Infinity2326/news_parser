@@ -5,12 +5,13 @@ from database import cursor
 
 app = Flask(__name__)
 cursor.execute("SELECT * FROM posts;")
-results = cursor.fetchall()
-rating = 0
+posts = cursor.fetchall()
+cursor.execute("SELECT * FROM rating;")
+rating = cursor.fetchall()
 
 @app.route('/')
 def index():
-    return render_template('index.html', res=results, rating=rating)
+    return render_template('index.html', posts=posts, rating=rating)
 
 
 if __name__ == "__main__":

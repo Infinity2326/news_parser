@@ -5,18 +5,20 @@
 {% endblock %}
 
 {% block body %}
-{% for one in res %}
-    <article id="article-{{one[0]}}">
-        <div class="title" id="title-{{one[0]}}">
-            {{one[1]}}
+{% for line in posts %}
+    <article id="article-{{line[0]}}">
+        <div class="title" id="title-{{line[0]}}">
+            {{line[1]}}
         </div>
-        <div class="story" id="story-{{one[0]}}">
-            {{one[2]}}
+        <div class="story" id="story-{{line[0]}}">
+            {{line[2]}}
         </div>
-        <div class="rating" id="rating-{{one[0]}}">
-            <div id="rating_score">{{rating}}</div>
-            <button class = "plus-rating" onclick="plusRating({{rating}})">+1</button>
-            <button class = "minus-rating" onclick="minusRating({{rating}})">-1</button>
+        <div class="rating" id="rating-{{line[0]}}" >
+            <div id="rating-score-{{line[0]}}">
+            {{rating[0][1]}}
+            </div>
+            <button class = "plus-rating" onclick="plusRating()">+1</button>
+            <button class = "minus-rating" onclick="minusRating()">-1</button>
         </div>
     </article>
 {% endfor %}

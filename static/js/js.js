@@ -1,14 +1,21 @@
-rating = 0;
+id = 'rating-score-1'
 
 function plusRating()
 {
-    rating = rating + 1
-    document.getElementById('rating_score').innerHTML=rating;
+    var rating = document.getElementById(id).innerHTML;
+    rating = parseInt(rating);
+    rating += 1;
+    document.getElementById(id).innerHTML=rating;
+    a = document.get
+    alert(a)
 }
 
 function minusRating()
 {
-    rating = rating - 1
-    document.getElementById('rating_score').innerHTML=rating;
+    var rating = document.getElementById(id).innerHTML;
+    rating = parseInt(rating);
+    rating -= 1;
+    document.getElementById(id).innerHTML=rating;
 }
-//
+
+

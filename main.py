@@ -7,10 +7,10 @@ def create_posts():
     titles_list = []
     stories_list = []
     for title in titles:
-        titles_list.append(title.text.replace('"', '.').replace("'", '.'))
+        titles_list.append(title.text.replace('"', '\"').replace("'", "\'"))
 
     for story in stories:
-        stories_list.append(story.text.replace('"', '.').replace("'", '.'))
+        stories_list.append(story.text.replace('"', '\"').replace("'", "\'"))
 
     cursor.execute("SELECT * FROM posts;")
 
@@ -20,10 +20,10 @@ def create_posts():
         sql_request = cursor.execute(sql_request).fetchone()
         if not sql_request:
             cursor.execute("INSERT INTO posts VALUES (?, ?, ?)", (None, title, stories_list[i]))
+            cursor.execute("INSERT INTO rating VALUES (?, ?)", (None, 0))
             connection.commit()
         else:
             pass
-
 
 
 url = 'https://slashdot.org/'
