@@ -9,6 +9,7 @@ posts = cursor.fetchall()
 cursor.execute("SELECT * FROM rating;")
 rating = cursor.fetchall()
 
+
 @app.route('/')
 def index():
     return render_template('index.html', posts=posts, rating=rating)

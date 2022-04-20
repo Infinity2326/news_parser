@@ -13,12 +13,12 @@
         <div class="story" id="story-{{line[0]}}">
             {{line[2]}}
         </div>
-        <div class="rating" id="rating-{{line[0]}}" >
+        <div class="rating">
             <div id="rating-score-{{line[0]}}">
             {{rating[0][1]}}
             </div>
-            <button class = "plus-rating" onclick="plusRating()">+1</button>
-            <button class = "minus-rating" onclick="minusRating()">-1</button>
+            <button class = "plus-rating" id="plus-{{line[0]}}" onclick="plusRating(this)">+1</button>
+            <button class = "minus-rating" id="miunus-{{line[0]}}"onclick="minusRating(this)">-1</button>
         </div>
     </article>
 {% endfor %}

@@ -1,21 +1,25 @@
-id = 'rating-score-1'
+part = 'rating-score-'
 
-function plusRating()
+function plusRating(obj)
 {
-    var rating = document.getElementById(id).innerHTML;
+    var ratingId = obj.id
+    ratingId = ratingId[5]
+    var fullId = part + ratingId;
+    var rating = document.getElementById(fullId).innerHTML;
     rating = parseInt(rating);
     rating += 1;
-    document.getElementById(id).innerHTML=rating;
-    a = document.get
-    alert(a)
+    document.getElementById(fullId).innerHTML=rating;
 }
 
-function minusRating()
+function minusRating(obj)
 {
-    var rating = document.getElementById(id).innerHTML;
+    var ratingId = obj.id
+    ratingId = ratingId[7]
+    var fullId = part + ratingId;
+    var rating = document.getElementById(fullId).innerHTML;
     rating = parseInt(rating);
     rating -= 1;
-    document.getElementById(id).innerHTML=rating;
+    document.getElementById(fullId).innerHTML=rating;
 }
 
 
