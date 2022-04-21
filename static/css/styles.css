@@ -34,7 +34,7 @@ body{
 }
 .plus-rating, .minus-rating{
 	color: rgb(72,114,148);
-	text-align: midddle;
+	text-align: center;
 	font-size: 17px;
 	font-family: "Glory", Arial, Helvetica, sans-serif;
     padding-top: 5px;
@@ -45,3 +45,8 @@ article{
 	margin-left: 10%;
 }
 
+a:active,
+a:hover,
+a{
+	text-decoration: none
+}

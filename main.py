@@ -26,6 +26,7 @@ def create_posts():
             pass
 
 
+
 url = 'https://slashdot.org/'
 response = requests.get(url)
 soup = BeautifulSoup(response.text, 'lxml')

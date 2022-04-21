@@ -7,9 +7,12 @@
 {% block body %}
 {% for line in posts %}
     <article id="article-{{line[0]}}">
-        <div class="title" id="title-{{line[0]}}">
-            {{line[1]}}
-        </div>
+            <a href="/story-{{line[0]}}">
+                <div class="title" id="title-{{line[0]}}">
+                    {{line[1]}}
+                </div>
+            </a>
+
         <div class="story" id="story-{{line[0]}}">
             {{line[2]}}
         </div>
