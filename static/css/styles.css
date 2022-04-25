@@ -67,6 +67,7 @@ a{
     font-family: "Glory", Arial, Helvetica, sans-serif;
     padding-top: 5px;
     line-height: 1.4em;
+	padding-bottom: 50px;
 }
 
 .comment-section input[type='text'],
@@ -75,14 +76,17 @@ a{
     margin-right: 40px;
     display: block;
     width: 100%;
-    padding-right
-    color: rgb(72,114,148);
+    color: black;
     font-size: 17px;
     font-family: "Glory", Arial, Helvetica, sans-serif;
     line-height: 1.4em;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 5px;
     line-height: 1.4em;
+	resize: none;
+}
+.required{
+	color: black;
 }
 
 .default{
@@ -90,4 +94,18 @@ a{
 	font-size: 2.1em;
 	text-align: left;
 	margin-bottom: 15px;
+}
+
+.comment-author{
+	padding-top: 20px;
+	font-family: Baskerville, Palatino, sans-serif;
+	font-size: 20px;
+	text-align: left;
+	color:black;
+}
+.comment-text{
+	font-family: Baskerville, Palatino, sans-serif;
+	font-size: 17px;
+	text-align: left;
+	color:black;
 }

@@ -13,12 +13,15 @@ rating = cursor.fetchall()
 
 @app.route('/story-<int:storyid>')
 def story(storyid):
+    storyid_list = [0]
     title = [0]
     story = [0]
     for line in posts:
+        storyid_list.append(line[0])
         title.append(line[1])
         story.append(line[2])
-    return render_template('story.html', title=title[storyid], story=story[storyid])
+
+    return render_template('story.html', storyid=storyid_list[storyid], title=title[storyid], story=story[storyid])
 
 
 @app.route('/')
