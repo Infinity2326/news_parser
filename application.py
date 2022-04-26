@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, request, url_for
 from main import create_posts
 from database import cursor
 
@@ -11,7 +11,7 @@ cursor.execute("SELECT * FROM rating;")
 rating = cursor.fetchall()
 
 
-@app.route('/story-<int:storyid>')
+@app.route('/story-<int:storyid>', methods=['GET', 'POST'])
 def story(storyid):
     storyid_list = [0]
     title = [0]
@@ -20,6 +20,12 @@ def story(storyid):
         storyid_list.append(line[0])
         title.append(line[1])
         story.append(line[2])
+
+    if request.method == 'POST':
+        author = request.form.get("author")
+        print(f"Author's name {author}")
+    else:
+        print('method get')
 
     return render_template('story.html', storyid=storyid_list[storyid], title=title[storyid], story=story[storyid])
 

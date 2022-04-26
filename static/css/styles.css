@@ -50,6 +50,7 @@ body{
 article{
 	background: rgb(255,255,255);
 	margin-left: 10%;
+	margin-right: 15px;
 }
 
 a:active,
@@ -97,15 +98,19 @@ a{
 }
 
 .comment-author{
-	padding-top: 20px;
+	margin-top: 20px;
 	font-family: Baskerville, Palatino, sans-serif;
 	font-size: 20px;
 	text-align: left;
 	color:black;
+	background: white;
+	padding: 12px;
 }
 .comment-text{
 	font-family: Baskerville, Palatino, sans-serif;
 	font-size: 17px;
 	text-align: left;
 	color:black;
+	background: white;
+	padding: 0 12px 12px 12px;
 }

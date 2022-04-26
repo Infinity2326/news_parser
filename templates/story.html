@@ -14,17 +14,19 @@
         </div>
     </article>
     <div class="comment-section">
-        <div class="default">Leave a Comment</div>
-        <form id="comment-form">
-        <label class="required">
-            Your name
-        </label>
-        <input id="author" type="text" required="required">
-        <label class="required">
-            Your message
-        </label>
-        <textarea id="comment" class ="area" rows="6" tabindex="4"  required="required"></textarea>
-        <input type="button" value="Submit" id="comment-post-button" class="default-button" onclick="create_comment(this)">
+        <div class="default">
+            Leave a Comment
+        </div>
+        <form id="comment-form" method="post">
+            <label class="required">
+                Your name
+            </label>
+            <input id="author" type="text" name="author" required="required">
+            <label class="required">
+                Your message
+            </label>
+            <textarea id="comment" name="comment" class ="area" rows="6" tabindex="4"  required="required"></textarea>
+            <input id="comment-post-button" type="button" value="Submit"  class="default-button" onclick="create_comment(this)">
         </form>
     </div>
 

@@ -1,5 +1,5 @@
 part = 'rating-score-'
-comment_number = 0
+comment_number = 1
 parent_div = document.querySelector('.comment-section');
 
 function plusRating(obj)
