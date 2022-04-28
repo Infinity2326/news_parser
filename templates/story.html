@@ -17,16 +17,16 @@
         <div class="default">
             Leave a Comment
         </div>
-        <form id="comment-form" method="post">
-            <label class="required">
+        <form id="comment-form" method="POST">
+            <label for="authorForm">
                 Your name
             </label>
-            <input id="author" type="text" name="author" required="required">
-            <label class="required">
+            <input id="authorForm" name="authorForm" type="text">
+            <label for="commentForm">
                 Your message
             </label>
-            <textarea id="comment" name="comment" class ="area" rows="6" tabindex="4"  required="required"></textarea>
-            <input id="comment-post-button" type="button" value="Submit"  class="default-button" onclick="create_comment(this)">
+            <textarea id="commentForm" name="commentForm" class ="area" rows="6" tabindex="4"></textarea>
+            <input id="comment-post-button" type="submit" value="Submit"  class="default-button" onclick="create_comment(this)">
         </form>
     </div>
 

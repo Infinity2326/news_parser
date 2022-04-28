@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for
 from main import create_posts
-from database import cursor
+from database import cursor, connection
 
 
 app = Flask(__name__)
@@ -9,9 +9,11 @@ cursor.execute("SELECT * FROM posts;")
 posts = cursor.fetchall()
 cursor.execute("SELECT * FROM rating;")
 rating = cursor.fetchall()
+cursor.execute("SELECT * FROM comments;")
+comments = cursor.fetchall()
 
 
-@app.route('/story-<int:storyid>', methods=['GET', 'POST'])
+@app.route('/story-<int:storyid>')
 def story(storyid):
     storyid_list = [0]
     title = [0]
@@ -21,18 +23,32 @@ def story(storyid):
         title.append(line[1])
         story.append(line[2])
 
-    if request.method == 'POST':
-        author = request.form.get("author")
-        print(f"Author's name {author}")
-    else:
-        print('method get')
-
     return render_template('story.html', storyid=storyid_list[storyid], title=title[storyid], story=story[storyid])
+
+
+@app.route('/story-<int:storyid>', methods=['POST', 'GET'])
+def hook_comment(storyid):
+    if request.method == 'POST':
+        text = request.form['commentForm']
+        author = request.form['authorForm']
+        cursor.execute("INSERT INTO comments VALUES (?, ?, ?)", (None, author, text))
+        connection.commit()
+    return f"{author} said: {text}"
 
 
 @app.route('/')
 def index():
     return render_template('index.html', posts=posts, rating=rating)
+
+# testing
+# @app.route('/', methods=['POST', 'GET'])
+# def check_rating():
+#     if request.method == 'POST':
+#         rating = request.form['rating-system']
+#     else:
+#         print('method get')
+#
+#     return rating
 
 
 if __name__ == "__main__":

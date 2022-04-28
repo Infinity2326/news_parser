@@ -11,6 +11,7 @@ function plusRating(obj)
     rating = parseInt(rating);
     rating += 1;
     document.getElementById(fullId).innerHTML = rating;
+    return rating;
 }
 
 function minusRating(obj)
@@ -22,6 +23,7 @@ function minusRating(obj)
     rating = parseInt(rating);
     rating -= 1;
     document.getElementById(fullId).innerHTML = rating;
+    return rating;
 }
 
 function create_comment()
