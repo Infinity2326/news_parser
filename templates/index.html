@@ -18,12 +18,10 @@
         </div>
         <div class="rating">
             <div id="rating-score-{{line[0]}}">
-            {{rating[0][1]}}
+            0
             </div>
-            <form id="rating-system" name="rating-system" method="POST">
-                <input type="submit" value="+1" class = "plus-rating" id="plus-{{line[0]}}" onclick="plusRating(this)">
-                <input type="submit" value="-1" class="minus-rating" id="miunus-{{line[0]}}"onclick="minusRating(this)">
-            </form>
+                <input type="button" value="+1" class = "plus-rating" id="plus-{{line[0]}}" onclick="plusRating(this)">
+                <input type="button" value="-1" class="minus-rating" id="minus-{{line[0]}}" onclick="minusRating(this)">
         </div>
     </article>
 {% endfor %}

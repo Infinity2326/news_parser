@@ -15,7 +15,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS rating(
 connection.commit()
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS comments(
-              id INTEGER PRIMARY KEY AUTOINCREMENT, 
+              postid INTEGER, 
               author TEXT,
               text TEXT)''')
 connection.commit()
