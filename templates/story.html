@@ -12,6 +12,11 @@
         <div class="story">
             {{story}}
         </div>
+        <form id="tts-form" action="/listen-story-{{ postid }}" method="POST">
+            <label for="tts">
+                <input id="tts" name="tts" type="submit" value="Listen text" class="default-button">
+            </label>
+        </form>
     </article>
     <div class="comment-section">
         <div class="default">
@@ -31,7 +36,11 @@
 
     {% for line in comm %}
         {% if postid == line[0]%}
+
             <div class="comment-author">
+                <div class="comment-time">
+                    {{line[3]}}
+                </div>
                 {{line[1]}}
             </div>
             <div class="comment-text">

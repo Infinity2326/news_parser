@@ -17,5 +17,6 @@ connection.commit()
 cursor.execute('''CREATE TABLE IF NOT EXISTS comments(
               postid INTEGER, 
               author TEXT,
-              text TEXT)''')
+              text TEXT,
+              post_time TEXT)''')
 connection.commit()

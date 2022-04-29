@@ -104,7 +104,7 @@ a{
 	text-align: left;
 	color:black;
 	background: white;
-	padding: 12px;
+	padding:  0 0 12px 12px;
 }
 .comment-text{
 	font-family: Baskerville, Palatino, sans-serif;
@@ -113,4 +113,17 @@ a{
 	color:black;
 	background: white;
 	padding: 0 12px 12px 12px;
+}
+
+.comment-time{
+	font-family: Baskerville, Palatino, sans-serif;
+	font-size: 11px;
+	text-align: right;
+	color: rgb(72,114,148);
+	background: white;
+	padding: 0 5px 0 0;
+}
+
+#tts-form{
+	padding: 10px;
 }
