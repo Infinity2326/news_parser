@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block body %}
+
+
 {% for line in posts %}
     <article id="article-{{line[0]}}">
             <a href="/story-{{line[0]}}">
@@ -18,10 +20,17 @@
         </div>
         <div class="rating">
             <div id="rating-score-{{line[0]}}">
-            0
+                {% for scoreId in rating %}
+                    {% if scoreId[0] == line[0] %}
+                        {{ scoreId[1] }}
+                    {% endif %}
+                {% endfor %}
             </div>
-                <input type="button" value="+1" class = "plus-rating" id="plus-{{line[0]}}" onclick="plusRating(this)">
-                <input type="button" value="-1" class="minus-rating" id="minus-{{line[0]}}" onclick="minusRating(this)">
+            <form  method="POST">
+                <input type="hidden" name="post-id" value="{{ line[0] }}">
+                <input type="submit" value="+1" name="plus-rating" class = "plus-rating" id="plus-{{line[0]}}">
+                <input type="submit" value="-1" name="minus-rating" class="minus-rating" id="minus-{{line[0]}}">
+            </form>
         </div>
     </article>
 {% endfor %}
