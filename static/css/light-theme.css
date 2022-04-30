@@ -1,0 +1,165 @@
+body{
+	background: rgb(240,240,240);
+	margin: 0;
+}
+
+.logo{
+	font-family: Baskerville, Palatino, sans-serif;
+	font-size: 3.1em;
+	font-style: italic;
+	text-align: left;
+	background: rgb(48, 59 ,68);
+	color: white;
+	padding-left: 10px;
+	border: 0;
+	cursor: pointer;
+}
+
+.title{
+	font-family: Baskerville, Palatino, sans-serif;
+	font-size: 2.1em;
+	color: rgb(72,114,148);
+	text-align: left;
+	margin: 15px 0 10px 0;
+	border-radius: 12px 12px 12px 10px;
+	padding: 12px;
+}
+
+.story{
+	font-size: 20px;
+	font-family: "Glory", Arial, Helvetica, sans-serif;
+	padding: 12px;
+}
+
+.rating{
+	font-size: 25px;
+	font-family: "Glory", Arial, Helvetica, sans-serif;
+	margin-left: 10px;
+	padding-bottom: 10px;
+}
+
+.default-button{
+	cursor: pointer;
+	color: rgb(72,114,148);
+	text-align: center;
+	font-size: 17px;
+	font-family: "Glory", Arial, Helvetica, sans-serif;
+    padding-top: 5px;
+    background: rgb(240,240,240);
+}
+
+article{
+	background: rgb(255,255,255);
+	margin-left: 10%;
+	margin-right: 15px;
+}
+
+a:active,
+a:hover,
+a{
+	text-decoration: none
+}
+
+.comment-section{
+    margin-left: 10%;
+    margin-top: 40px;
+    margin-right: 20%;
+    color: rgb(72,114,148);
+    font-size: 17px;
+    font-family: "Glory", Arial, Helvetica, sans-serif;
+    padding-top: 5px;
+    line-height: 1.4em;
+	padding-bottom: 50px;
+}
+
+.comment-section input[type='text'],
+.comment-section textarea{
+    margin-bottom: 10px;
+    margin-right: 40px;
+    display: block;
+    width: 100%;
+    color: black;
+    font-size: 17px;
+    font-family: "Glory", Arial, Helvetica, sans-serif;
+    line-height: 1.4em;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 5px;
+    line-height: 1.4em;
+	resize: none;
+}
+
+.default{
+	font-family: Baskerville, Palatino, sans-serif;
+	font-size: 2.1em;
+	text-align: left;
+	margin-bottom: 15px;
+}
+
+.comment-author{
+	margin-top: 20px;
+	font-family: Baskerville, Palatino, sans-serif;
+	font-size: 20px;
+	text-align: left;
+	color:black;
+	background: white;
+	padding:  0 0 12px 12px;
+}
+.comment-text{
+	font-family: Baskerville, Palatino, sans-serif;
+	font-size: 17px;
+	text-align: left;
+	color:black;
+	background: white;
+	padding: 0 12px 12px 12px;
+}
+
+.comment-time{
+	font-family: Baskerville, Palatino, sans-serif;
+	font-size: 11px;
+	text-align: right;
+	color: rgb(72,114,148);
+	background: white;
+	padding: 0 5px 0 0;
+}
+
+#tts-form{
+	padding: 10px;
+}
+
+.comment{
+	background: white;
+}
+
+.plus-rating,
+.minus-rating{
+	cursor: pointer;
+	border: 0;
+	color: rgb(70, 70, 70);
+	text-align: center;
+	background: none;
+}
+
+.dislike:hover,
+.like:hover,
+.theme-button:hover{
+  color: rgb(72,114,148);
+  transition: all .2s ease-in-out;
+  transform: scale(1.1);
+}
+
+.theme-button{
+	cursor: pointer;
+	border: 0;
+	color: white;
+	text-align: center;
+	background: none;
+	font-size: 40px;
+	margin-right: 7px;
+	position:absolute;
+	top: 10px;
+	right:0;
+}
+
+.header{
+	background: rgb(48, 59 ,68);
+}

@@ -36,14 +36,16 @@
 
     {% for line in comm %}
         {% if postid == line[0]%}
-            <div class="comment-author">
-                <div class="comment-time">
-                    {{line[3]}}
+            <div class="comment">
+                <div class="comment-author">
+                    <div class="comment-time">
+                        {{line[3]}}
+                    </div>
+                    {{line[1]}}
                 </div>
-                {{line[1]}}
-            </div>
-            <div class="comment-text">
-                {{line[2]}}
+                <div class="comment-text">
+                    {{line[2]}}
+                </div>
             </div>
         {% endif %}
     {% endfor %}
