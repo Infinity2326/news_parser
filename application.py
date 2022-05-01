@@ -6,12 +6,22 @@ from database import connection
 
 
 app = Flask(__name__)
+theme = 'css/light-theme.css'
 create_posts()
 cursor = connection.cursor()
 cursor.execute("SELECT * FROM posts;")
 posts = cursor.fetchall()
 cursor.execute("SELECT * FROM rating;")
 rating = cursor.fetchall()
+
+
+def changeTheme():
+    global theme
+    if theme == 'css/light-theme.css':
+        theme = 'css/dark-theme.css'
+    else:
+        theme = 'css/light-theme.css'
+    return theme
 
 
 @app.route('/story-<int:storyid>')
@@ -29,10 +39,10 @@ def story(storyid):
     comments = cursor.fetchall()
     cursor.close()
     return render_template('story.html', comm=comments, postid=storyid, storyid=storyid_list[storyid],
-                           title=title[storyid], story=story[storyid])
+                           title=title[storyid], story=story[storyid], theme=theme)
 
 
-@app.route('/story-<int:storyid>', methods=['POST', 'GET'])
+@app.route('/story-<int:storyid>', methods=['POST'])
 def hook_comment(storyid):
     storyid_list = [0]
     title = [0]
@@ -41,19 +51,29 @@ def hook_comment(storyid):
         storyid_list.append(line[0])
         title.append(line[1])
         story.append(line[2])
-
     if request.method == 'POST':
-        cursor = connection.cursor()
-        text = request.form['commentForm'].replace('"', '\"').replace("'", "\'")
-        author = request.form['authorForm'].replace('"', '\"').replace("'", "\'")
-        dt = datetime.datetime.now()
-        dt_string = dt.strftime("Posted: %d.%m.%Y  %H:%M:%S")
-        cursor.execute("INSERT INTO comments VALUES (?, ?, ?, ?)", (storyid, author, text, dt_string))
-        connection.commit()
-        cursor.execute("SELECT * FROM comments")
-        comments = cursor.fetchall()
-        return render_template('story.html', comm=comments, postid=storyid, storyid=storyid_list[storyid],
-                               title=title[storyid], story=story[storyid])
+        if "change-theme" in request.form:
+            changeTheme()
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM comments")
+            comments = cursor.fetchall()
+            cursor.close()
+            return render_template('story.html', comm=comments, postid=storyid, storyid=storyid_list[storyid],
+                                   title=title[storyid], story=story[storyid], theme=theme)
+
+        elif "authorForm" or "textForm" in request.form:
+            cursor = connection.cursor()
+            text = request.form['commentForm'].replace('"', '\"').replace("'", "\'")
+            author = request.form['authorForm'].replace('"', '\"').replace("'", "\'")
+            dt = datetime.datetime.now()
+            dt_string = dt.strftime("Posted: %d.%m.%Y  %H:%M:%S")
+            cursor.execute("INSERT INTO comments VALUES (?, ?, ?, ?)", (storyid, author, text, dt_string))
+            connection.commit()
+            cursor.execute("SELECT * FROM comments")
+            comments = cursor.fetchall()
+            cursor.close()
+            return render_template('story.html', comm=comments, postid=storyid, storyid=storyid_list[storyid],
+                                   title=title[storyid], story=story[storyid], theme=theme)
 
 
 @app.route('/listen-story-<int:storyid>', methods=['POST', 'GET'])
@@ -71,13 +91,27 @@ def listen_story(storyid):
     tts = gTTS(text=text, lang=language, slow=False)
     ttsPath = "static/audio/music.mp3"
     tts.save(ttsPath)
+    if request.method == 'POST':
+        if "change-theme" in request.form:
+            changeTheme()
+            return render_template('listen.html', postid=storyid, storyid=storyid_list[storyid],
+                                   title=title[storyid], story=story[storyid], theme=theme)
+
     return render_template('listen.html', postid=storyid, storyid=storyid_list[storyid],
-                           title=title[storyid], story=story[storyid])
+                           title=title[storyid], story=story[storyid], theme=theme)
 
 
 @app.route('/', methods=['POST', 'GET'])
 def rating_score():
     if request.method == 'POST':
+        if "change-theme" in request.form:
+            changeTheme()
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM rating;")
+            newRating = cursor.fetchall()
+            cursor.close()
+            return render_template('index.html', posts=posts, rating=newRating, theme=theme)
+
         if "plus-rating" in request.form:
             cursor = connection.cursor()
             postId = request.form.get('post-id')
@@ -91,7 +125,7 @@ def rating_score():
             cursor.execute("SELECT * FROM rating;")
             newRating = cursor.fetchall()
             cursor.close()
-            return render_template('index.html', posts=posts, rating=newRating)
+            return render_template('index.html', posts=posts, rating=newRating, theme=theme)
 
         elif "minus-rating" in request.form:
             cursor = connection.cursor()
@@ -106,14 +140,14 @@ def rating_score():
             cursor.execute("SELECT * FROM rating;")
             newRating = cursor.fetchall()
             cursor.close()
-            return render_template('index.html', posts=posts, rating=newRating)
+            return render_template('index.html', posts=posts, rating=newRating, theme=theme)
 
     if request.method == 'GET':
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM rating;")
         newRating = cursor.fetchall()
         cursor.close()
-        return render_template('index.html', posts=posts, rating=newRating)
+        return render_template('index.html', posts=posts, rating=newRating, theme=theme)
 
 
 if __name__ == "__main__":

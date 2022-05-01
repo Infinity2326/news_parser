@@ -40,12 +40,13 @@ body{
 
 .default-button{
 	cursor: pointer;
-	color: rgb(72,114,148);
+	color: rgb(240,240,240);
 	text-align: center;
-	font-size: 17px;
+	font-size: 20px;
 	font-family: "Glory", Arial, Helvetica, sans-serif;
     padding-top: 5px;
-    background: rgb(240,240,240);
+    background: rgb(72,114,148);
+	border: 0;
 }
 
 article{
@@ -118,7 +119,6 @@ a{
 	font-size: 11px;
 	text-align: right;
 	color: rgb(72,114,148);
-	background: white;
 	padding: 0 5px 0 0;
 }
 

@@ -15,9 +15,6 @@ body{
 	border: 0;
 	cursor: pointer;
 }
-#logo.dark-theme{
-	background: rgb(32, 32, 32);
-}
 
 .title{
 	font-family: Baskerville, Palatino, sans-serif;
@@ -46,10 +43,11 @@ body{
 	cursor: pointer;
 	color: rgb(70, 70, 70);
 	text-align: center;
-	font-size: 17px;
+	font-size: 20px;
 	font-family: "Glory", Arial, Helvetica, sans-serif;
     padding-top: 5px;
     background: rgb(240,240,240);
+	border: 0;
 }
 
 article{
@@ -126,7 +124,6 @@ a{
 #tts-form{
 	padding: 10px;
 }
-
 
 .comment{
 	background: rgb(30, 30, 30);
