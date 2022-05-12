@@ -141,13 +141,27 @@ a{
 
 .dislike:hover,
 .like:hover,
-.theme-button:hover{
+.theme-button:hover,
+.login-button:hover{
   color: rgb(72,114,148);
   transition: all .2s ease-in-out;
   transform: scale(1.1);
 }
 
 .theme-button{
+	cursor: pointer;
+	border: 0;
+	color: white;
+	text-align: center;
+	background: none;
+	font-size: 40px;
+	margin-right: 70px;
+	position:absolute;
+	top: 10px;
+	right:0;
+}
+
+.login-button{
 	cursor: pointer;
 	border: 0;
 	color: white;
@@ -162,4 +176,35 @@ a{
 
 .header{
 	background: rgb(48, 59 ,68);
+}
+
+.login-menu-block{
+	font-family: "Glory", Arial, Helvetica, sans-serif;
+	margin: 10% 40% 20% 40%;
+	background: white;
+	text-align: center
+}
+.login-block{
+	font-family: "Glory", Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	margin: 10% 38% 20% 38%;
+	background: white;
+	text-align: center
+}
+
+#reg,
+#log{
+	font-size: 30px;
+	margin-top: 30px;
+	text-align: center;
+}
+
+#login-text{
+	padding-bottom: 30px;
+	padding-top: 30px;
+	text-align: center;
+	font-size: 24px;
+}
+.registration-text{
+	padding-bottom: 40px;
 }

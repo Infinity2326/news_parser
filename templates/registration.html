@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>News</title>
+{% endblock %}
+{% block body %}
+    <div class="login-block">
+        <div class="default" id="login-text">
+            Registration
+        </div>
+        <form method="POST">
+            <div id="login-text">
+                Your name
+                <input id="registration-login" name="registration-login" type="text" required>
+                <div id="login-text">
+                    Your password
+                    <input id="registration-password" name="registration-password" type="password" required>
+                </div>
+                <div>
+                    <input type="submit" value="Create an account" class="default-button">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

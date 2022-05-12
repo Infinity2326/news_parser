@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>News</title>
+{% endblock %}
+
+{% block body %}
+<div class="login-menu-block">
+    <div class="default" id="login-text">
+        Login or create an account
+    </div>
+    <div class="login-text">
+        <button id="reg" class="default-button" onclick='location.href="/login"'>login</button>
+    </div>
+    <div class="registration-text">
+        <button id="reg" class="default-button" onclick='location.href="/registration"'>registration</button>
+    </div>
+
+</div>
+{% endblock %}

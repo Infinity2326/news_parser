@@ -1,8 +1,9 @@
 import datetime
 from flask import Flask, render_template, request, url_for
 from gtts import gTTS
-from main import create_posts
+from posts import create_posts
 from database import connection
+from flask_login import LoginManager
 
 
 app = Flask(__name__)
@@ -150,5 +151,50 @@ def rating_score():
         return render_template('index.html', posts=posts, rating=newRating, theme=theme)
 
 
-if __name__ == "__main__":
-    app.run(debug=True, use_reloader=False)
+@app.route('/login-menu', methods=['POST', 'GET'])
+def loginMenu():
+    if request.method == 'POST':
+        if "change-theme" in request.form:
+            changeTheme()
+            return render_template('login-menu.html', theme=theme)
+
+    if request.method == 'GET':
+        return render_template('login-menu.html', theme=theme)
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if request.method == 'POST':
+        if "change-theme" in request.form:
+            changeTheme()
+            return render_template('login.html', theme=theme)
+
+    if request.method == 'GET':
+        return render_template('login.html', theme=theme)
+
+
+@app.route('/registration', methods=['POST', 'GET'])
+def registration():
+    if request.method == 'POST':
+        if "change-theme" in request.form:
+            changeTheme()
+            return render_template('registration.html', theme=theme)
+
+        elif "registration-login" or "registration-password" in request.form:
+            cursor = connection.cursor()
+            newLogin = request.form['registration-login']
+            newPassword = request.form['registration-password']
+            cursor.execute("SELECT * FROM users;")
+            users = cursor.fetchall()
+            print(users)
+            if not newLogin:
+                return "username already taken"
+
+            else:
+                cursor.execute("INSERT INTO users VALUES (?, ?)", (newLogin, newPassword))
+                connection.commit()
+                cursor.close()
+                return f"You registered as {newLogin} password is {newPassword}"
+
+    if request.method == 'GET':
+        return render_template('registration.html', theme=theme)

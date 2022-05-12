@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>News</title>
+{% endblock %}
+{% block body %}
+    <div class="login-block">
+        <div class="default" id="login-text">
+            Login
+        </div>
+        <form method="POST">
+            <div id="login-text">
+                Your name
+                <input id="login-login" name="login-login" type="text" required>
+                <div id="login-text">
+                    Your password
+                    <input id="login-password" name="login-password" type="password" required>
+                </div>
+                <div>
+                    <input type="submit" value="Login" class="default-button">
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
