@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, url_for
 from gtts import gTTS
 from posts import create_posts
 from database import connection
-from flask_login import LoginManager
 
 
 app = Flask(__name__)
@@ -169,6 +168,15 @@ def login():
             changeTheme()
             return render_template('login.html', theme=theme)
 
+        elif "login-login" or "login-password" in request.form:
+            cursor = connection.cursor()
+            login = request.form['login-login']
+            password = request.form['login-password']
+            cursor.execute(f'SELECT login FROM users WHERE login="{login}"')
+            if cursor.fetchone() is None:
+                return f"success"             
+            else:
+                return "wrong inputs"
     if request.method == 'GET':
         return render_template('login.html', theme=theme)
 
@@ -184,17 +192,16 @@ def registration():
             cursor = connection.cursor()
             newLogin = request.form['registration-login']
             newPassword = request.form['registration-password']
-            cursor.execute("SELECT * FROM users;")
-            users = cursor.fetchall()
-            print(users)
-            if not newLogin:
-                return "username already taken"
-
-            else:
+            cursor.execute(f'SELECT login FROM users WHERE login="{newLogin}"')
+            if cursor.fetchone() is None:
                 cursor.execute("INSERT INTO users VALUES (?, ?)", (newLogin, newPassword))
                 connection.commit()
                 cursor.close()
-                return f"You registered as {newLogin} password is {newPassword}"
+                return f"You registered as {newLogin} password is {newPassword}"             
+
+            else:
+                return "username already taken"
+
 
     if request.method == 'GET':
         return render_template('registration.html', theme=theme)
