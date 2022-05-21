@@ -187,7 +187,7 @@ a{
 .login-block{
 	font-family: "Glory", Arial, Helvetica, sans-serif;
 	font-size: 20px;
-	margin: 10% 38% 20% 38%;
+	margin: 10% 35% 20% 35%;
 	background: rgb(70, 70, 70);
 	text-align: center
 }
@@ -208,4 +208,31 @@ a{
 
 .registration-text{
 	padding-bottom: 40px;
+}
+
+
+.pad{
+	padding-bottom: 30px;
+	text-align: center;	
+}
+
+#success{
+	padding: 6px;
+	margin: 20px 35% 0% 35%;
+	text-align: center;
+	font-size: 30px;
+	background: rgb(82, 221, 82);
+}
+
+#error{
+	padding: 6px;
+	margin: 20px 35% 0% 35%;
+	text-align: center;
+	font-size: 30px;
+	background: red;
+}
+
+.alarm{
+	font-size: 20px;
+	font-family: "Glory", Arial, Helvetica, sans-serif;
 }

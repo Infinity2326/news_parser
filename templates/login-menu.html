@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>News</title>
+    <title>News</title>
 {% endblock %}
 
 {% block body %}
+
+
+            
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alarm" id="{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
 <div class="login-menu-block">
     <div class="default" id="login-text">
         Login or create an account

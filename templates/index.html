@@ -6,6 +6,14 @@
 
 {% block body %}
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alarm"d id="{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
     {% for line in posts %}
 
         <article id="article-{{line[0]}}">

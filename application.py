@@ -1,19 +1,26 @@
 import datetime
-from flask import Flask, render_template, request, url_for
+import os
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Flask, render_template, request, url_for, flash, redirect
+from flask_login import LoginManager, login_user, login_required
 from gtts import gTTS
 from posts import create_posts
 from database import connection
+from userlogin import UserLogin
 
 
 app = Flask(__name__)
+#app.config(dict(DATABASE=os.path.join(app.root_path, 'database.db')))
+login_manager = LoginManager(app)
+
 theme = 'css/light-theme.css'
-create_posts()
+
 cursor = connection.cursor()
 cursor.execute("SELECT * FROM posts;")
 posts = cursor.fetchall()
 cursor.execute("SELECT * FROM rating;")
 rating = cursor.fetchall()
-
+create_posts()
 
 def changeTheme():
     global theme
@@ -23,8 +30,14 @@ def changeTheme():
         theme = 'css/light-theme.css'
     return theme
 
+@login_manager.user_loader
+def load_user(user_id):
+    print("LOAD USER ")
+    return UserLogin.from_database(user_id)
+
 
 @app.route('/story-<int:storyid>')
+@login_required
 def story(storyid):
     cursor = connection.cursor()
     storyid_list = [0]
@@ -173,10 +186,24 @@ def login():
             login = request.form['login-login']
             password = request.form['login-password']
             cursor.execute(f'SELECT login FROM users WHERE login="{login}"')
-            if cursor.fetchone() is None:
-                return f"success"             
+            loginFromDB = cursor.fetchone()
+            loginFromDB = loginFromDB[0]
+            if loginFromDB == login:
+                cursor.execute(f'SELECT password FROM users WHERE login="{login}"')
+                hashedPassword = cursor.fetchone()
+                hashedPassword = hashedPassword[0]
+                if check_password_hash(hashedPassword, password):
+                    userlogin = UserLogin().create_user(login)
+                    login_user(userlogin)
+                    flash('Successful login', 'success')
+                    return redirect(url_for("rating_score"))
+                else:
+                    flash('Wrong login or password', 'error')
+                    return redirect(url_for("login"))
             else:
-                return "wrong inputs"
+                flash('Wrong login or password', 'error')
+                return redirect(url_for("login"))
+
     if request.method == 'GET':
         return render_template('login.html', theme=theme)
 
@@ -189,19 +216,26 @@ def registration():
             return render_template('registration.html', theme=theme)
 
         elif "registration-login" or "registration-password" in request.form:
-            cursor = connection.cursor()
-            newLogin = request.form['registration-login']
-            newPassword = request.form['registration-password']
-            cursor.execute(f'SELECT login FROM users WHERE login="{newLogin}"')
-            if cursor.fetchone() is None:
-                cursor.execute("INSERT INTO users VALUES (?, ?)", (newLogin, newPassword))
-                connection.commit()
-                cursor.close()
-                return f"You registered as {newLogin} password is {newPassword}"             
+            if len(request.form['registration-login']) >= 4 and len(request.form['registration-password']) >= 6 \
+            and request.form['registration-password'] == request.form['registration-password2']:
+                cursor = connection.cursor()
+                newLogin = request.form['registration-login']
+                newPassword = request.form['registration-password']
+                passwordHash = generate_password_hash(newPassword)
+                cursor.execute(f'SELECT login FROM users WHERE login="{newLogin}"')
+                if cursor.fetchone() is None:
+                    cursor.execute("INSERT INTO users VALUES (?, ?, ?)", (None, newLogin, passwordHash))
+                    connection.commit()
+                    cursor.close()
+                    flash('Successful registration', 'success')
+                    return redirect(url_for("loginMenu"))
 
+                else:
+                    flash('This name is already registered', 'error')
+                    return redirect(url_for("registration"))
             else:
-                return "username already taken"
-
+                flash('Passwords are different', 'error')
+                return redirect(url_for("registration"))
 
     if request.method == 'GET':
         return render_template('registration.html', theme=theme)

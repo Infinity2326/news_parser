@@ -6,20 +6,21 @@ cursor = connection.cursor()
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS posts(
               id INTEGER PRIMARY KEY AUTOINCREMENT, 
-              title TEXT, 
-              story TEXT)''')
+              title TEXT NOT NULL, 
+              story TEXT NOT NULL)''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS rating(
               id INTEGER PRIMARY KEY AUTOINCREMENT, 
-              score INTEGER)''')
+              score INTEGER NOT NULL)''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS comments(
-              postid INTEGER, 
-              author TEXT,
-              text TEXT,
-              post_time TEXT)''')
+              postid INTEGER NOT NULL, 
+              author TEXT NOT NULL,
+              text TEXT NOT NULL,
+              post_time TEXT NOT NULL)''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS users(
-              login TEXT,
-              password TEXT)''')
+              id INTEGER PRIMARY KEY AUTOINCREMENT, 
+              login TEXT NOT NULL,
+              password TEXT NOT NULL)''')
 connection.commit()
