@@ -4,27 +4,33 @@ import sqlite3
 connection = sqlite3.connect('database.db', check_same_thread=False)
 cursor = connection.cursor()
 
-def getUser(self, user_id):
+
+def getUser(user_id):
     try:
-        self.cursor.execute(f"SELECT * FROM users WHERE id = {user_id} LIMIT 1")
-        newId = self.cursor.fetchone()
+        cursor.execute(f'SELECT login FROM users WHERE login="{user_id}"')
+        newId = cursor.fetchone()
         if not newId:
             return False
 
+        try:
+            newId = newId[0]
+        except:
+            pass
+        
         return newId
 
     except sqlite3.Error as e:
         print(e)
 
+
+
 class UserLogin():
     def from_database(self, user_id):
         self.__user = getUser(user_id)
-        
         return self
 
     def create_user(self, user):
         self.__user = user
-        print(type(self.__user), self.__user)
         return self
 
     def is_authenticated(self):
@@ -37,4 +43,5 @@ class UserLogin():
         return False
 
     def get_id(self):
-        return str(self.__user['id'])
+        user = self.__user
+        return str(user)

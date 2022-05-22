@@ -24,3 +24,8 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS users(
               login TEXT NOT NULL,
               password TEXT NOT NULL)''')
 connection.commit()
+
+cursor.execute('''CREATE TABLE IF NOT EXISTS ratingusers(
+              vote TEXT NOT NULL,
+              user TEXT NOT NULL)''')
+connection.commit()

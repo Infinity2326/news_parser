@@ -164,7 +164,7 @@ a{
 .login-button{
 	cursor: pointer;
 	border: 0;
-	color: white;
+	color: rgb(70, 70, 70);
 	text-align: center;
 	background: none;
 	font-size: 40px;
@@ -222,6 +222,7 @@ a{
 	text-align: center;
 	font-size: 30px;
 	background: rgb(82, 221, 82);
+	border: 3px solid green;
 }
 
 #error{
@@ -230,6 +231,7 @@ a{
 	text-align: center;
 	font-size: 30px;
 	background: red;
+	border: 3px solid rgb(165, 0, 0);
 }
 
 .alarm{

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>News</title>
+{% endblock %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alarm" id="{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<div class="login-menu-block">
+    <div class="default" id="login-text">
+        You loggined as:
+    </div>
+    <div class="default" id="login-text">
+        {{user}}
+    </div>
+    <div class="registration-text">
+        <button id="logout" class="default-button" onclick='location.href="/logout"'>logout</button>
+    </div>
+</div>
+{% endblock %}

@@ -220,6 +220,7 @@ a{
 	text-align: center;
 	font-size: 30px;
 	background: rgb(82, 221, 82);
+	border: 3px solid green;
 }
 
 #error{
@@ -228,6 +229,7 @@ a{
 	text-align: center;
 	font-size: 30px;
 	background: red;
+	border: 3px solid rgb(165, 0, 0);
 }
 
 .alarm{
