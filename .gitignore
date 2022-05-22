@@ -2,4 +2,5 @@
 /venv/*
 /__pycache__/*
 database.db
+/static/audio/music.mp3
 static/audio/music.mp3

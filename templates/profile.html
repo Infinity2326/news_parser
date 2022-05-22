@@ -9,16 +9,16 @@
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
-      <div class="alarm" id="{{ category }}">{{ message }}</div>
+        <div class="alarm" id="{{ category }}">{{ message }}</div>
     {% endfor %}
   {% endif %}
 {% endwith %}
 
 <div class="login-menu-block">
-    <div class="default" id="login-text">
+    <div class="login-text">
         You loggined as:
     </div>
-    <div class="default" id="login-text">
+    <div class="login-text">
         {{user}}
     </div>
     <div class="registration-text">

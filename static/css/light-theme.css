@@ -85,7 +85,6 @@ a{
     line-height: 1.4em;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 5px;
-    line-height: 1.4em;
 	resize: none;
 }
 
@@ -199,7 +198,7 @@ a{
 	text-align: center;
 }
 
-#login-text{
+.login-text{
 	padding-bottom: 30px;
 	padding-top: 30px;
 	text-align: center;
@@ -211,12 +210,32 @@ a{
 
 .pad{
 	padding-bottom: 30px;
-	text-align: center;	
+	margin-left: 30px;
+	text-align: left;
+}
+
+#registration-login,
+#registration-password,
+#registration-password2,
+#login-password,
+#login-login
+{
+	background: white;
+	margin-right: 30px;
+	float: right;.
+	text-align: right;
+	border: 1px solid rgba(0, 0, 0, 0.6);
+	border-radius: 3px;
+}
+
+.create{
+	text-align: center;
+	padding-bottom: 30px;
 }
 
 #success{
 	padding: 6px;
-	margin: 20px 35% 0% 35%;
+	margin: 20px 35% 0 35%;
 	text-align: center;
 	font-size: 30px;
 	background: rgb(82, 221, 82);
@@ -225,7 +244,7 @@ a{
 
 #error{
 	padding: 6px;
-	margin: 20px 35% 0% 35%;
+	margin: 20px 35% 0 35%;
 	text-align: center;
 	font-size: 30px;
 	background: red;

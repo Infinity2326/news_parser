@@ -1,6 +1,5 @@
 import sqlite3
 
-
 connection = sqlite3.connect('database.db', check_same_thread=False)
 cursor = connection.cursor()
 
@@ -16,12 +15,11 @@ def getUser(user_id):
             newId = newId[0]
         except:
             pass
-        
+
         return newId
 
-    except sqlite3.Error as e:
-        print(e)
-
+    except:
+        pass
 
 
 class UserLogin():

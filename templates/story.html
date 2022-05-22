@@ -5,6 +5,14 @@
 {% endblock %}
 
 {% block body %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+        <div class="alarm" id="{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
     <article>
         <div class="title">
             {{title}}
@@ -45,7 +53,6 @@
             </div>
         {% endif %}
     {% endfor %}
-
     </div>
 
 {% endblock %}

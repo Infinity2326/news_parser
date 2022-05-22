@@ -10,7 +10,6 @@ from posts import create_posts
 from database import connection
 from userlogin import UserLogin
 
-
 app = Flask(__name__)
 login_manager = LoginManager(app)
 login_manager.login_view = 'loginMenu'
@@ -26,6 +25,7 @@ cursor.execute("SELECT * FROM rating;")
 rating = cursor.fetchall()
 create_posts()
 
+
 def changeTheme():
     global theme
     if theme == 'css/light-theme.css':
@@ -34,11 +34,10 @@ def changeTheme():
         theme = 'css/light-theme.css'
     return theme
 
+
 @login_manager.user_loader
 def load_user(user_id):
-    print(user_id)
-    if user_id == False:
-        print('THIS IS FALSE')
+    if not user_id:
         flask_login.logout_user()
 
     return UserLogin().from_database(user_id)
@@ -101,6 +100,7 @@ def hook_comment(storyid):
             cursor.execute("SELECT * FROM comments")
             comments = cursor.fetchall()
             cursor.close()
+            flash('See your comment below!', 'success')
             return render_template('story.html', comm=comments, postid=storyid, storyid=storyid_list[storyid],
                                    title=title[storyid], story=story[storyid], theme=theme, user=user)
 
@@ -129,6 +129,7 @@ def listen_story(storyid):
     return render_template('listen.html', postid=storyid, storyid=storyid_list[storyid],
                            title=title[storyid], story=story[storyid], theme=theme)
 
+
 @app.route('/', methods=['GET'])
 def index():
     if request.method == 'GET':
@@ -156,14 +157,14 @@ def change_rating():
         elif "minus-rating" or "plus-rating" in request.form:
             cursor = connection.cursor()
             postId = request.form.get('post-id')
-            postId = int(postId)            
+            postId = int(postId)
             if not current_user.is_authenticated:
                 flash('Login to do this', 'error')
                 return redirect(url_for('loginMenu'))
 
             if current_user.is_authenticated():
                 user = current_user.get_id()
-                newUser = user + str(postId) 
+                newUser = user + str(postId)
 
             else:
                 flash('Login to do this', 'error')
@@ -177,15 +178,13 @@ def change_rating():
             if cursor.fetchone() is not None:
                 cursor.execute(f"SELECT vote FROM ratingusers WHERE user = '{newUser}'")
                 vote = cursor.fetchone()
-                print(vote)
                 vote = vote[0]
-                print(vote)
                 if "minus-rating" in request.form:
                     if vote == "positive":
-                        ratingScore = new -2
+                        ratingScore = new - 2
                         newVote = "negative"
                         cursor.execute("UPDATE rating SET score = ? WHERE id = ?", (int(ratingScore), int(postId)))
-                        cursor.execute("UPDATE ratingusers SET vote = ? WHERE user = ?", (newVote, newUser)) 
+                        cursor.execute("UPDATE ratingusers SET vote = ? WHERE user = ?", (newVote, newUser))
                         connection.commit()
 
                     elif vote == "negative":
@@ -201,14 +200,14 @@ def change_rating():
                         ratingScore = new + 2
                         newVote = "positive"
                         cursor.execute("UPDATE rating SET score = ? WHERE id = ?", (int(ratingScore), int(postId)))
-                        cursor.execute("UPDATE ratingusers SET vote = ? WHERE user = ?", (newVote, newUser)) 
+                        cursor.execute("UPDATE ratingusers SET vote = ? WHERE user = ?", (newVote, newUser))
                         connection.commit()
             else:
                 if "minus-rating" in request.form:
                     ratingScore = new - 1
                     newVote = "negative"
                     cursor.execute("UPDATE rating SET score = ? WHERE id = ?", (int(ratingScore), int(postId)))
-                    cursor.execute("INSERT INTO ratingusers VALUES (?, ?)", (newVote, newUser)) 
+                    cursor.execute("INSERT INTO ratingusers VALUES (?, ?)", (newVote, newUser))
                     connection.commit()
                 else:
                     ratingScore = new + 1
@@ -217,11 +216,11 @@ def change_rating():
                     cursor.execute("INSERT INTO ratingusers VALUES (?, ?)", (newVote, newUser))
                     connection.commit()
 
-            cursor.execute("SELECT * FROM rating;")  
+            cursor.execute("SELECT * FROM rating;")
             newRating = cursor.fetchall()
             cursor.close()
+            flash('You rated this story!', 'success')
             return render_template('index.html', posts=posts, rating=newRating, theme=theme)
-
 
     if request.method == 'GET':
         cursor = connection.cursor()
@@ -275,7 +274,7 @@ def login():
                     login_user(userlogin)
                     flash('Successful login', 'success')
                     return redirect(url_for("profile"))
-                    
+
                 else:
                     flash('Wrong login or password', 'error')
                     return redirect(url_for("login"))
@@ -301,7 +300,7 @@ def registration():
         elif "registration-login" or "registration-password" in request.form:
 
             if len(request.form['registration-login']) >= 4 and len(request.form['registration-password']) >= 6 \
-            and request.form['registration-password'] == request.form['registration-password2']:
+                    and request.form['registration-password'] == request.form['registration-password2']:
                 cursor = connection.cursor()
                 newLogin = request.form['registration-login']
                 newPassword = request.form['registration-password']
@@ -329,16 +328,17 @@ def registration():
 @app.route('/profile', methods=['POST', 'GET'])
 @login_required
 def profile():
+    if current_user.is_authenticated():
+        user = current_user.get_id()
+    else:
+        user = None
+
     if request.method == 'POST':
         if "change-theme" in request.form:
             changeTheme()
-            return render_template('profile.html', theme=theme)
+            return render_template('profile.html', theme=theme, user=user)
 
     if request.method == 'GET':
-        if current_user.is_authenticated():
-            user = current_user.get_id()
-        else:
-            user = None
         return render_template('profile.html', theme=theme, user=user)
 
 
@@ -355,3 +355,9 @@ def logout():
         flash('Successful logout', 'success')
         return redirect(url_for('index'))
 
+
+@app.errorhandler(500)
+@app.errorhandler(404)
+def error_page():
+    flash('Page not found', 'error')
+    return redirect(url_for('index'))

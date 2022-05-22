@@ -8,21 +8,21 @@
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
-      <div class="alarm"d id="{{ category }}">{{ message }}</div>
+      <div class="alarm" id="{{ category }}">{{ message }}</div>
     {% endfor %}
   {% endif %}
 {% endwith %}
 
     <div class="login-block">
-        <div class="default" id="login-text">
+        <div class="login-text">
             Registration
         </div>
         <form method="POST">
             <div class="pad">
                 Your name
-                <input id="registration-login" name="registration-login" type="text" required>
+                <input id="registration-login" class="pad2"  name="registration-login" type="text" required>
             </div>
-                <div class="pad">
+                <div id ="reg-area" class="pad">
                     Your password
                     <input id="registration-password" name="registration-password" type="password" required>
                 </div>
@@ -30,10 +30,9 @@
                     Confirm password
                     <input id="registration-password2" name="registration-password2" type="password" required>
                 </div>
-                <div class="pad">
+                <div class="create">
                     <input type="submit" value="Create an account" class="default-button">
                 </div>
-
         </form>
     </div>
 {% endblock %}

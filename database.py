@@ -4,6 +4,7 @@ import sqlite3
 connection = sqlite3.connect('database.db', check_same_thread=False)
 cursor = connection.cursor()
 
+
 cursor.execute('''CREATE TABLE IF NOT EXISTS posts(
               id INTEGER PRIMARY KEY AUTOINCREMENT, 
               title TEXT NOT NULL, 

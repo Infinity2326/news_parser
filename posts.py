@@ -16,9 +16,8 @@ def create_posts():
 
     for i in range(len(titles_list)):
         title = titles_list[i]
-        sql_request = f'SELECT * FROM posts WHERE title="{title}";'
-        sql_request = cursor.execute(sql_request).fetchone()
-        if not sql_request:
+        cursor.execute(f'SELECT * FROM posts WHERE title="{title}"')
+        if not cursor.fetchone():
             cursor.execute("INSERT INTO posts VALUES (?, ?, ?)", (None, title, stories_list[i]))
             cursor.execute("INSERT INTO rating VALUES (?, ?)", (None, 0))
             connection.commit()
